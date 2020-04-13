@@ -1,6 +1,6 @@
-import flask
+import flask, app
 from flask import Flask, request, jsonify
-from app import showAllDoc, finderOneDoc
+from app import showAllDoc, finderOneDoc, insertOneDoc
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -12,19 +12,24 @@ def home():
 
 @app.route('/api/macbooks/', methods = ['GET'])
 
-def api_allMacbooks():
+def api_macbooksAll():
     result=showAllDoc()
 
     return jsonify(result)
 
 @app.route('/api/macbooks/<idNumber>', methods = ['GET'])
 
-def api_id(idNumber):
+def api_macbooksId(idNumber):
     
     _id = 'macbook_'+ str(idNumber)
     result = finderOneDoc("_id", _id)
     
     return jsonify (result)
 
+@app.route('/api/macbooks/insert/<userName>', methods = ['POST'])
+
+def api_macbooksInsert(userName):
+    insertOneDoc(userName)
+    return 201
 
 app.run()

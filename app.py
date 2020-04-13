@@ -10,7 +10,7 @@ countDoc = collection.count_documents({})
 nextName = ("macbook_" + str(countDoc+1))
 
 def insertOneDoc (user):
-    doc = { "name": nextName, "user" : user }
+    doc = { "_id": nextName, "user" : user }
     collection.insert_one(doc)
 
     print ("inserted " + nextName)
