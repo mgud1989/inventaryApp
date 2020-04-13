@@ -8,13 +8,7 @@ app.config["DEBUG"] = True
 @app.route ('/', methods = ['GET'])
 
 def home():
-    return "<h1>My API with Python Flask</h1><p>bueno la idea seria que esta api devuelva los datos de la BBD mongo inventario</p>"   
-
-@app.route('/api/macbooks/all', methods = ['GET'])
-
-def api_macbooks():
-    allMacbooks = showAllDoc()
-    return jsonify (allMacbooks)
+    return "<h1>API with Python Flask mongo</h1>Welcome to the inventary<p></p>"   
 
 @app.route('/api/macbooks/', methods = ['GET'])
 
@@ -22,8 +16,9 @@ def api_id():
     if '_id' in request.args:
         _id = "macbook_" + str(request.args['_id'])
 
-    result = finderOneDoc("_id", _id)
-     
+        result = finderOneDoc("_id", _id)
+    else:
+        result = showAllDoc()
     return jsonify (result)
 
 

@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-from bson.objectid import ObjectId
+
 
 MONGO_URI = 'mongodb://localhost'
 client = MongoClient(MONGO_URI, username = "root", password = 'admin')
