@@ -14,7 +14,6 @@ def home():
 
 def api_macbooksAll():
     result=showAllDoc()
-
     return jsonify(result)
 
 @app.route('/api/macbooks/<idName>', methods = ['GET'])
@@ -23,7 +22,6 @@ def api_macbooksId(idName):
     
     name = 'macbook_'+ str(idName)
     result = finderOneDoc("name", name)
-    
     return jsonify (result)
 
 @app.route('/api/macbooks/insert/<userName>', methods = ['POST'])
