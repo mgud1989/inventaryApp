@@ -1,6 +1,6 @@
 import flask, app
 from flask import Flask, request, jsonify
-from app import showAllDoc, finderOneDoc, insertOneDoc
+from app import showAllDoc, finderOneDoc, insertOneDoc, deleteOneDoc
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -29,7 +29,18 @@ def api_macbooksId(idNumber):
 @app.route('/api/macbooks/insert/<userName>', methods = ['POST'])
 
 def api_macbooksInsert(userName):
+    if not request.json or not userName in request.json:
+        400
+    
     insertOneDoc(userName)
     return 201
+
+@app.route('/api/macbooks/delete/<idNumber>', methods = ['DELETE'])
+
+def api_macbooksDelete(idNumber):
+    _id= 'macbook_'+ str(idNumber)
+    deleteOneDoc('_id', _id)
+
+    return jsonify({'deleted':_id})
 
 app.run()

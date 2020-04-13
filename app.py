@@ -9,7 +9,7 @@ collection = db['macbooks']
 countDoc = collection.count_documents({})
 nextName = ("macbook_" + str(countDoc+1))
 
-def insertOneDoc (user):
+def insertOneDoc (user='undesigned'):
     doc = { "_id": nextName, "user" : user }
     collection.insert_one(doc)
 
@@ -35,7 +35,6 @@ def updateOneDoc (keyFind, valueFind, keySet, valueSet):
 def deleteOneDoc (k, v):
     doc = {k : v}
     collection.delete_one(doc)
-    return print (v + " has been deleted")
 
 def deleteManyDoc (k, v):
     doc = {k : v}
@@ -46,5 +45,3 @@ def showAllDoc():
     result = collection.find()
 
     return list(result)
-
-
