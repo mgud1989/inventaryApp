@@ -6,17 +6,19 @@ client = MongoClient(MONGO_URI, username = "root", password = 'admin')
 db = client['inventary']
 collection = db['macbooks']
 
-countDoc = collection.count_documents({})
-nextName = ("macbook_" + str(countDoc+1))
+counterDoc = 0
 
 def insertOneDoc (user='undesigned'):
-    doc = { "_id": nextName, "user" : user }
+    global counterDoc 
+    nextName = ("macbook_" + str(counterDoc+1))
+    doc = { "name": nextName, "user" : user }
     collection.insert_one(doc)
+    counterDoc+=1
 
-    print ("inserted " + nextName)
+    return finderOneDoc('name', nextName)
 
 def finderManyDoc (*dict): 
-    results = collection.find(*dict)
+    results = collection.find(*dict, {'_id':False})
     
     for r in results:
         print (r)
@@ -25,7 +27,7 @@ def finderManyDoc (*dict):
 
 def finderOneDoc (k, v):
     doc = {k : v}
-    result = collection.find(doc)
+    result = collection.find(doc, {'_id':False})
 
     return list(result)
 
@@ -39,9 +41,8 @@ def deleteOneDoc (k, v):
 def deleteManyDoc (k, v):
     doc = {k : v}
     collection.delete_many(doc)
-    return print ('All ' + v + " has been deleted")
 
 def showAllDoc():
-    result = collection.find()
+    result = collection.find({}, {'_id':False})
 
     return list(result)

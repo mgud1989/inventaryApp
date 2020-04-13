@@ -17,12 +17,12 @@ def api_macbooksAll():
 
     return jsonify(result)
 
-@app.route('/api/macbooks/<idNumber>', methods = ['GET'])
+@app.route('/api/macbooks/<idName>', methods = ['GET'])
 
-def api_macbooksId(idNumber):
+def api_macbooksId(idName):
     
-    _id = 'macbook_'+ str(idNumber)
-    result = finderOneDoc("_id", _id)
+    name = 'macbook_'+ str(idName)
+    result = finderOneDoc("name", name)
     
     return jsonify (result)
 
@@ -32,15 +32,15 @@ def api_macbooksInsert(userName):
     if not request.json or not userName in request.json:
         400
     
-    insertOneDoc(userName)
-    return 201
+    inserted = insertOneDoc(userName)
+    return jsonify(inserted)
 
 @app.route('/api/macbooks/delete/<idNumber>', methods = ['DELETE'])
 
 def api_macbooksDelete(idNumber):
-    _id= 'macbook_'+ str(idNumber)
-    deleteOneDoc('_id', _id)
+    name = 'macbook_'+ str(idNumber)
+    deleteOneDoc('name', name)
 
-    return jsonify({'deleted':_id})
+    return jsonify({'deleted': name})
 
 app.run()
