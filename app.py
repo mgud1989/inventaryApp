@@ -6,7 +6,7 @@ client = MongoClient(MONGO_URI, username = "root", password = 'admin')
 db = client['inventary']
 collection = db['macbooks']
 
-counterDoc = 0
+counterDoc = collection.count_documents({})
 
 def insertOneDoc (user='undesigned'):
     global counterDoc 
