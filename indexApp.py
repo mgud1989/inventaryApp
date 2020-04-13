@@ -12,13 +12,18 @@ def home():
 
 @app.route('/api/macbooks/', methods = ['GET'])
 
-def api_id():
-    if '_id' in request.args:
-        _id = "macbook_" + str(request.args['_id'])
+def api_allMacbooks():
+    result=showAllDoc()
 
-        result = finderOneDoc("_id", _id)
-    else:
-        result = showAllDoc()
+    return jsonify(result)
+
+@app.route('/api/macbooks/<idNumber>', methods = ['GET'])
+
+def api_id(idNumber):
+    
+    _id = 'macbook_'+ str(idNumber)
+    result = finderOneDoc("_id", _id)
+    
     return jsonify (result)
 
 
