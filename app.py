@@ -31,8 +31,11 @@ def finderOneDoc (k, v):
 
     return list(result)
 
-def updateOneDoc (keyFind, valueFind, keySet, valueSet):
-    collection.update_many ({keyFind:valueFind},{'$set':{keySet:valueSet}})
+def updateOneDoc (kf, vf, kn, vn):
+    filter = {kf:vf}
+    newValue = {kn:vn}
+
+    collection.update_many (filter,{'$set':newValue})
 
 def deleteOneDoc (k, v):
     doc = {k : v}

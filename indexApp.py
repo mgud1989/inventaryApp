@@ -1,6 +1,6 @@
 import flask, app
 from flask import Flask, request, jsonify
-from app import showAllDoc, finderOneDoc, insertOneDoc, deleteOneDoc
+from app import showAllDoc, finderOneDoc, insertOneDoc, deleteOneDoc, updateOneDoc
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -41,4 +41,11 @@ def api_macbooksDelete(idNumber):
 
     return jsonify({'deleted': name})
 
+@app.route('/api/macbooks/update/<idNumber>/<newUser>', methods = ['PUT'])
+
+def api_macbooksUpdate(idNumber,newUser):
+    name = 'macbook_'+ str(idNumber)
+
+    updateOneDoc('name',name,'user',newUser)
+    return jsonify({'status': 'updated'})
 app.run()
