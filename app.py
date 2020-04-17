@@ -31,10 +31,8 @@ def finderOneDoc (k, v):
 
     return list(result)
 
-def updateOneDoc (kf, vf, kn, vn):
-    filter = {kf:vf}
-    newValue = {kn:vn}
-
+def updateOneDoc (filter,newValue):
+    
     collection.update_many (filter,{'$set':newValue})
 
 def deleteOneDoc (k, v):
@@ -49,3 +47,5 @@ def showAllDoc():
     result = collection.find({}, {'_id':False})
 
     return list(result)
+
+updateOneDoc({'user':'kim'}, {'user':'kimberly'})

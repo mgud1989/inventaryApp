@@ -45,7 +45,8 @@ def api_macbooksDelete(idNumber):
 
 def api_macbooksUpdate(idNumber,newUser):
     name = 'macbook_'+ str(idNumber)
-
-    updateOneDoc('name',name,'user',newUser)
+    nameMacbook = {'name':name}
+    newData = {'user':newUser}
+    updateOneDoc(nameMacbook, newData)
     return jsonify({'status': 'updated'})
 app.run()
