@@ -20,8 +20,7 @@ def api_macbooksAll():
 
 def api_macbooksId(idName):
     
-    name = 'macbook_'+ str(idName)
-    result = finderOneDoc("name", name)
+    result = finderOneDoc("name", ('macbook_'+ str(idName)))
     return jsonify (result)
 
 @app.route('/api/macbooks/insert/<userName>', methods = ['POST'])
@@ -36,17 +35,15 @@ def api_macbooksInsert(userName):
 @app.route('/api/macbooks/delete/<idNumber>', methods = ['DELETE'])
 
 def api_macbooksDelete(idNumber):
-    name = 'macbook_'+ str(idNumber)
-    deleteOneDoc('name', name)
+    deleteOneDoc('name',('macbook_'+ str(idNumber)))
 
     return jsonify({'deleted': name})
 
 @app.route('/api/macbooks/update/<idNumber>/<newUser>', methods = ['PUT'])
 
 def api_macbooksUpdate(idNumber,newUser):
-    name = 'macbook_'+ str(idNumber)
-    nameMacbook = {'name':name}
-    newData = {'user':newUser}
-    updateOneDoc(nameMacbook, newData)
+    
+    updateOneDoc({'name':('macbook_'+ str(idNumber))}, {'user':newUser})
+    
     return jsonify({'status': 'updated'})
 app.run()
